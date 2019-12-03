@@ -2,6 +2,7 @@ require('../server/config/config');
 
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 
 const app = express();
@@ -10,6 +11,10 @@ const bodyParser = require('body-parser');
 // Para obtener los datos de Form incluidos en la llamada Post
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Habilitación de la carpeta Pública
+app.use(express.static(path.resolve(__dirname, '../public')));
+//console.log(path.resolve(__dirname, '../public'));
 
 // Configuración Global de Rutas (Métodos)
 app.use(require('./routes/index'));
