@@ -41,6 +41,14 @@ let usuarioSchema = new Schema({
     }
 })
 
+// Para impedir que la contraseña se envíe como respuesta
+usuarioSchema.methods.toJSON = function() {
+    let user = this;
+    let userObject = user.toObject();
+    delete userObject.password;
+    return userObject;
+}
+
 // Para validar datos únicos
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' })
 

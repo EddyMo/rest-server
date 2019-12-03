@@ -1,19 +1,18 @@
 require('../server/config/config');
 
-const express = require('express')
+const express = require('express');
 const mongoose = require('mongoose');
 
 
-const app = express()
-const bodyParser = require('body-parser')
+const app = express();
+const bodyParser = require('body-parser');
 
 // Para obtener los datos de Form incluidos en la llamada Post
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// Métodos
-app.use(require('./routes/usuario').app); //
-
+// Configuración Global de Rutas (Métodos)
+app.use(require('./routes/index'));
 
 // Conección a la BD
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
@@ -27,8 +26,6 @@ mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: tru
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // });
-
-
 
 
 app.listen(process.env.PORT, () => {
